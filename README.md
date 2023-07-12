@@ -15,7 +15,8 @@ At my organization, access to restricted content is controlled with an allow lis
 For the first part of the algorithm, I opened the `"allow_list.txt"` file. First, I assigned this file name as a string to the `import_file` variable:
 
 ```
-Assign `import_file' to the name of the file
+# Assign `import_file' to the name of the file
+
 import_file = "allow_list.txt"
 ```
 
@@ -23,10 +24,11 @@ Then, I used a `with` statement to open the file:
 
 ```
 # Build `with` statement to read in the initial contents of the file
+
 with open(import_file, "r") as file:
 ```
 
-In my algorithm, the `with` statement is used with the `.open()` function in read mode to open the allow list file for the purpose of reading it. The purpose of opening the file is to allow me to access the IP addresses stored in the allow list file. The `with` keyword will help manage the resources by closing the file after exiting the `with` statement. In the code `with open(import_file, "r") as file:`, the `open()` function has two parameters. The first identifies the file to import, and then the second indicates what I want to do with the file. In this case, `"r"` indicates that I want to read it. The code also uses the as keyword to assign a variable named file; file stores the output of the `.open()` function while I work within the `with` statement.
+In my algorithm, the `with` statement is used with the `.open()` function in read mode to open the allow list file for the purpose of reading it. The purpose of opening the file is to allow me to access the IP addresses stored in the allow list file. The `with` keyword will help manage the resources by closing the file after exiting the `with` statement. In the code `with open(import_file, "r") as file:`, the `open()` function has two parameters. The first identifies the file to import, and then the second indicates what I want to do with the file. In this case, `"r"` indicates that I want to read it. The code also uses the as keyword to assign a variable named `file`; `file` stores the output of the `.open()` function while I work within the `with` statement.
 
 ## Read the file contents
 
@@ -34,11 +36,14 @@ In order to read the file contents, I used the `.read()` method to convert it in
 
 ```
 with open(import_file, "r") as file:
-  # Use `.read()` to read the imported file and store it in a variable named `ip_addresses`
+
+ # Use `.read()` to read the imported file and store it in a variable named `ip_addresses`
+
   ip_addresses = file.read()
 ```
 
 When using an `.open()` function that includes the argument `"r"` for “read,” I can call the `.read()` function in the body of the `with` statement. The `.read()` method converts the file into a string and allows me to read it. I applied the `.read()` method to the `file` variable identified in the `with` statement. Then, I assigned the string output of this method to the variable `ip_addresses`. 
+
 In summary, this code reads the contents of the `"allow_list.txt"` file into a string format that allows me to later use the string to organize and extract data in my Python program.
 
 ## Convert the string into a list
@@ -47,6 +52,7 @@ In order to remove individual IP addresses from the allow list, I needed it to b
 
 ```
 # Use `.split()` to convert `ip_addresses` from a string to a list
+
 ip_addresses = ip_addresses.split()
 ```
 
@@ -77,8 +83,8 @@ for element in remove_list:
 
     if element in ip_addresses:
 
-      #use the `.remove()` method to remove
-      #elements from `ip_addresses`
+      # use the `.remove()` method to remove
+      # elements from `ip_addresses`
 
         ip_addresses.remove(element)
 ```
@@ -93,6 +99,7 @@ As a final step in my algorithm, I needed to update the allow list file with the
 
 ```
 # Convert `ip_addresses` back to a string so that it can be written into the text file
+
 ip_addresses = "\n".join(ip_addresses)
 ```
 
@@ -102,8 +109,11 @@ Then, I used another `with` statement and the `.write()` method to update the fi
 
 ```
 # Build `with` statement to rewrite the original file
+
 with open(import_file, "w") as file:
+
   #Rewrite the file, replacing its contents with `ip_addresses`
+
   file.write(ip_addresses)
 ```
 
